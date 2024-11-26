@@ -1,0 +1,31 @@
+.colortext {
+    color: rgb(255, 1, 1); /* Червоний колір виділення */
+  }
+  
+  /* 3D ефект для шрифта */
+  h1, h2, h3, p {
+    font-family: Arial, sans-serif; /* Вибір шрифта */
+    font-size: 36px; /* Розмір шрифта */
+    color: #00ff3c; /* Колір тексту */
+    text-shadow: 
+      1px 1px 2px #000000,
+      2px 2px 3px rgb(13, 39, 15),
+      3px 3px 4px rgb(0, 0, 0); /* Створення ефекту глибини */
+    transform: rotateX(10deg) rotateY(10deg); /* Легкий нахил для 3D вигляду */
+    transition: transform 0.3s ease, text-shadow 0.3s ease; /* Плавний перехід */
+  }
+  
+  h1:hover, h2:hover, h3:hover, p:hover {
+    transform: rotateX(0deg) rotateY(15deg); /* Нахил при наведенні */
+    text-shadow: 
+      2px 2px 4px rgb(0, 0, 0),
+      4px 4px 6px rgb(1, 37, 5); /* Інтенсивніший ефект при наведенні */
+  }
+  
+  /* Клас, який фіксує зміни після наведення */
+  .stuck {
+    transform: rotateX(0deg) rotateY(15deg); /* Фіксований нахил */
+    text-shadow: 
+      2px 2px 4px rgba(7, 26, 1, 0.94),
+      4px 4px 6px rgb(0, 0, 0); /* Інтенсивніший ефект при наведенні */
+  }

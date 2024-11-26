@@ -1,0 +1,35 @@
+/* styles.css */
+
+/* Базові стилі для контейнера */
+body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Режим дня */
+body.day {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Режим ночі */
+body.night {
+    background-color: #000000;
+    color: #ecf0f1;
+}
+
+/* Кнопка перемикання */
+.theme-toggle-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #1f0e7d;
+    color: rgb(238, 255, 0);
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    background-color: #2980b9;
+}

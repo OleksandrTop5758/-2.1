@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Effect</title>
+  <style>
+    /* CSS стилі для фону та канваса */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      color: lime;
+      font-family: monospace;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    /* Контейнер для тексту та посилання */
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+      color: lime;
+    }
+
+    .overlay h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .overlay a {
+      color: lime;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    .overlay a:hover {
+      color: white;
+    }
+
+    .overlay button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: lime;
+      color: black;
+      border: none;
+      cursor: pointer;
+      font-family: monospace;
+    }
+
+    .overlay button:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Контейнер для тексту, посилання та кнопки -->
+  <div class="overlay">
+    <h1>Welcome to the Matrix</h1>
+    <a href="Virtual reality.html" target="_blank">Click here to enter</a>
+    <button id="changeColor">Change Symbols Color</button>
+  </div>
+
+  <!-- Канвас для ефекту Матриці -->
+  <canvas id="matrix"></canvas>
+
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    // Розмір канваса збігається з розмірами вікна
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Символи для ефекту
+    const symbols = "01";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize; // Кількість колонок символів
+
+    // Масив для зберігання координат падіння кожної колонки
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    // Початковий колір символів
+    let symbolColor = "lime";
+
+    // Функція малювання
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Легке затемнення для шлейфу
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = symbolColor; // Колір символів
+      ctx.font = `${fontSize}px monospace`;
+
+      // Проходимо по кожній колонці
+      for (let i = 0; i < drops.length; i++) {
+        const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Випадковий обнулювач, щоб текст "перезавантажувався"
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        // Падіння тексту вниз
+        drops[i]++;
+      }
+    }
+
+    // Оновлення анімації кожні 30 мс
+    setInterval(draw, 30);
+
+    // Зміна кольору символів
+    const changeColorButton = document.getElementById("changeColor");
+    const colors = ["lime", "white", "red", "blue", "yellow"];
+    let currentColorIndex = 0;
+
+    changeColorButton.addEventListener("click", () => {
+      currentColorIndex = (currentColorIndex + 1) % colors.length;
+      symbolColor = colors[currentColorIndex];
+    });
+  </script>
+</body>
+</html>
